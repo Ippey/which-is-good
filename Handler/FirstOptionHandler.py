@@ -1,15 +1,29 @@
 from ask_sdk_core.dispatch_components import AbstractRequestHandler
+from ask_sdk_core.utils import is_intent_name
 from ask_sdk_model.ui import SimpleCard
+import random
 
 
 class FirstOptionHandler(AbstractRequestHandler):
 
     def can_handle(self, handler_input):
-        return handler_input.request_envelope.request.object_type == "FirstOptionIntent"
+        return is_intent_name("FirstOptionIntent")(handler_input)
 
     def handle(self, handler_input):
         # セッション変更
         first = handler_input.request_envelope.request.intent.slots['first'].value
-        handler_input.attributes_manager.session_attributes['first'] = first
-        card = SimpleCard("どっちがいい？", 'もう片方は？')
-        return handler_input.response_builder.ask('もう片方は？').set_card(card).response
+        if handler_input.attributes_manager.session_attributes.get('first') is not None:
+            second = first
+            first = handler_input.attributes_manager.session_attributes['first']
+            rand = random.randrange(2)
+            choice = second
+            if rand == 0:
+                choice = first
+
+            card = SimpleCard("どっちがいい？", choice + 'がいいと思います。')
+            handler_input.response_builder.speak(choice + 'がいいと思います。').set_card(card).set_should_end_session(True)
+            return handler_input.response_builder.response
+        else:
+            handler_input.attributes_manager.session_attributes['first'] = first
+            card = SimpleCard("どっちがいい？", 'もう片方は？')
+            return handler_input.response_builder.speak('もう片方は').ask('もう片方は？').set_card(card).response

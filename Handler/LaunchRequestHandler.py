@@ -10,5 +10,4 @@ class LaunchRequestHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         speech_text = "どっちがいいか決めてあげます。ひとつめを教えてください。"
         card = SimpleCard("どっちがいい？", speech_text)
-        handler_input.response_builder.speak(speech_text).set_card(card).set_should_end_session(True)
-        return handler_input.response_builder.response
+        return handler_input.response_builder.speak(speech_text).set_card(card).ask(speech_text).response
