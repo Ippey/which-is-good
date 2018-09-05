@@ -25,5 +25,5 @@ class FirstOptionHandler(AbstractRequestHandler):
             return handler_input.response_builder.response
         else:
             handler_input.attributes_manager.session_attributes['first'] = first
-            card = SimpleCard("どっちがいい？", 'もう片方は？')
-            return handler_input.response_builder.speak('もう片方は').ask('もう片方は？').set_card(card).response
+            card = SimpleCard("どっちがいい？", 'もうひとつは？')
+            return handler_input.response_builder.speak('もうひとつは？').ask('もうひとつは？').set_card(card).response

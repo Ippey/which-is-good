@@ -8,6 +8,6 @@ class LaunchRequestHandler(AbstractRequestHandler):
         return handler_input.request_envelope.request.object_type == "LaunchRequest"
 
     def handle(self, handler_input):
-        speech_text = "どっちがいいか決めてあげます。ひとつめを教えてください。"
+        speech_text = "どっちがいいか私が決めてあげます。ひとつめを教えてください。"
         card = SimpleCard("どっちがいい？", speech_text)
         return handler_input.response_builder.speak(speech_text).set_card(card).ask(speech_text).response
