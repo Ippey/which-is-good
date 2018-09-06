@@ -9,5 +9,5 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         speech_text = "どっちがいいか私が決めてあげます。ひとつめを教えてください。"
-        card = SimpleCard("どっちがいい？", speech_text)
+        card = SimpleCard("気まぐれレコメンド", speech_text)
         return handler_input.response_builder.speak(speech_text).set_card(card).ask(speech_text).response

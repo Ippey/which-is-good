@@ -20,10 +20,10 @@ class FirstOptionHandler(AbstractRequestHandler):
             if rand == 0:
                 choice = first
 
-            card = SimpleCard("どっちがいい？", choice + 'がいいと思います。')
+            card = SimpleCard("気まぐれレコメンド", choice + 'がいいと思います。')
             handler_input.response_builder.speak(choice + 'がいいと思います。').set_card(card).set_should_end_session(True)
             return handler_input.response_builder.response
         else:
             handler_input.attributes_manager.session_attributes['first'] = first
-            card = SimpleCard("どっちがいい？", 'もうひとつは？')
+            card = SimpleCard("気まぐれレコメンド？", 'もうひとつは？')
             return handler_input.response_builder.speak('もうひとつは？').ask('もうひとつは？').set_card(card).response

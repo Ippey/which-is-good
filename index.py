@@ -14,7 +14,7 @@ sb.request_handlers.extend([
 @sb.request_handler(can_handle_func=is_intent_name("AMAZON.HelpIntent"))
 def help_intent_handler(handler_input):
     speech_text = '私が2つのうちどちらがいいか決めてあげます。まずは1つめを教えてください。続いて2つめを教えていただけると、どちらか決めます'
-    card = SimpleCard('どっちがいい？', speech_text)
+    card = SimpleCard('気まぐれレコメンド', speech_text)
     return handler_input.response_builder.speak(speech_text).set_card(card).ask(speech_text).response
 
 
@@ -26,7 +26,7 @@ def cancel_and_stop_intent_handler(handler_input):
     speech_text = "またつかってください。"
 
     handler_input.response_builder.speak(speech_text).set_card(
-        SimpleCard("どっちがいい？", speech_text))
+        SimpleCard("気まぐれレコメンド", speech_text))
     return handler_input.response_builder.response
 
 
